@@ -1,0 +1,12 @@
+__pycache__/
+__pypackages__/
+.cache
+.local
+.env
+.pytest_cache
+.pythonlibs
+.upm
+*.log
+*.sqlite3
+# migrations/
+# alembic/versions/*.pyc

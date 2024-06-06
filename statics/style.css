@@ -1,0 +1,32 @@
+/*
+facebook dark mode
+#18191a | #242526 | #3a3b3c | #e4e6eb | #b0b3b8
+*/
+
+body {
+    background-color: #242526;
+    color: #b0b3b8;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.icon-svg {
+    width: 120px;
+    height: 100px;
+    animation: spin infinite 20s linear;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+@keyframes spin {
+    from {
+    transform: rotate(0deg);
+    }
+    to {
+    transform: rotate(360deg);
+    }
+}
