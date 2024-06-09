@@ -12,7 +12,7 @@ from helpers.auth_helper import get_password_hash, authenticate_user, create_acc
 
 router = APIRouter()
 
-@router.post("/register", response_model=User)
+@router.post("/register")
 def register_user(user: UserRequest, db: Session = Depends(get_session)):
     statement = select(User).where(or_(User.email == user.email, User.username == user.username))
     exist_user = db.exec(statement).first()
@@ -31,7 +31,7 @@ def register_user(user: UserRequest, db: Session = Depends(get_session)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return new_user
+    return {"status": "success", "message": f"Username {user.username} registered successfully."}
 
 @router.post("/token", response_model=Token)
 async def get_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_session)):

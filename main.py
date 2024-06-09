@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from core.database import engine
-from models.user_model import SQLModel
+from sqlmodel import SQLModel
+from models import user_model # need to add all models here to create table if no exists
 from routes import apis, webs
 
 app = FastAPI()
