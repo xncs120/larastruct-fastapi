@@ -1,5 +1,5 @@
 # Larastruct Fastapi - Quickstart
-This is fastapi template that is inspired by laravel project folder structure\
+This is fastapi template that is inspired by laravel project folder structure.\
 **Note: This implementation serves as guidance or reference and is not intended as a complete, production-ready solution.
 
 ## Templates included
