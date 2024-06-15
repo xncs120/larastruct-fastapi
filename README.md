@@ -1,5 +1,6 @@
 # Larastruct Fastapi - Quickstart
 This is fastapi template that is inspired by laravel project folder structure
+**Note: This implementation serves as guidance or reference and is not intended as a complete, production-ready solution.
 
 ## Templates included
 - [x] Database connection (Postgres)
@@ -8,7 +9,7 @@ This is fastapi template that is inspired by laravel project folder structure
 - [x] Simple JWT token generation
 - [x] Authentication on secured routes
 - [x] Config file and env settings
-- [x] Orm wrapper (SQLModel)
+- [x] Orm wrapper (Warpping SQLAlchemy + SQLModel `only include most used query`)
 - [x] Sample user api, schema, html, css
 - [x] Test files location
 - [x] Docker localhost
@@ -69,3 +70,6 @@ app/
 ├── requirements.txt
 ```
 
+## Reference and external source
+- [Fastapi](https://fastapi.tiangolo.com/)
+- [Laravel](https://laravel.com/)
