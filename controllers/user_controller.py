@@ -1,16 +1,20 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlmodel import Session
-from core.database import get_session
-from sqlmodel import Session, select
-from models.user_model import User
-from middlewares.oauth_middleware import get_current_user
+
+from core.orm import Orm
+from middlewares.oauth_middleware import auth_user
 
 router = APIRouter()
 
-@router.get("/{username}")
-def get_user(username: str, db: Session = Depends(get_session), current_user: User = Depends(get_current_user)):
-    statement = select(User.name, User.username, User.email).where(User.username == username)
-    user = db.exec(statement).first()
+@router.get('/get/{username}')
+def get_user(username: str, auth_user = Depends(auth_user)):
+    user = Orm('User').select(['username', 'email', 'name']).where({'username': username}).first()
     if user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-    return user._asdict()
+        raise HTTPException(status_code=404, detail='User not found')
+    return user
+
+@router.post('/edit')
+def edit_user(name: str, auth_user = Depends(auth_user)):
+    user = Orm('User').where({'username': auth_user.username}).update({'name': name})
+    if user is None:
+        raise HTTPException(status_code=404, detail='User not found')
+    return user

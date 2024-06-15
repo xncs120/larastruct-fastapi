@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      PG_DB_HOST: db
+      PG_DB_PORT: "5432"
+      PG_DB_USER: user
+      PG_DB_PASSWORD: password
+      PG_DB_NAME: database
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database

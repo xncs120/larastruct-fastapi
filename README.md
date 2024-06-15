@@ -2,13 +2,16 @@
 This is fastapi template that is inspired by laravel project folder structure
 
 ## Templates included
-- [x] Register user to database
+- [x] Database connection (Postgres)
+- [ ] Alembic migration
+- [x] Register user
 - [x] Simple JWT token generation
 - [x] Authentication on secured routes
 - [x] Config file and env settings
-- [x] Sample user api, schema, html template, css style
+- [x] Orm wrapper (SQLModel)
+- [x] Sample user api, schema, html, css
 - [x] Test files location
-- [ ] Docker
+- [x] Docker localhost
 
 ## Tech used
 ### Stacks
@@ -28,7 +31,7 @@ app/
 ├── core/
 │   └── __init__.py
 │   └── config.py
-│   └── database.py
+│   └── orm.py
 ├── helpers/ (
 │   └── __init__.py
 │   └── auth_helper.py
