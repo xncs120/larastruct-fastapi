@@ -22,6 +22,15 @@ This is fastapi template that is inspired by laravel project folder structure
 `alembic=1.13.1` `psycopg2-binary=2.9.9` `passlib==1.7.4` `bcrypt=4.1.3`
 `oauthlib=3.2.2` `python-jose=3.3.0` `python-multipart=0.0.9` `Jinja2=3.1.4`
 
+## Installation
+Download and install python
+Download and install [docker](https://www.docker.com/products/docker-desktop/)
+```sh
+git clone https://github.com/THIS-REPO.git
+cd THIS-REPO
+docker-compose up
+```
+
 ## Folder structure
 ```sh
 app/
