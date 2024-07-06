@@ -68,7 +68,7 @@ class Orm: # wrapper
         return result.first()
     
     def create(self, kwargs):
-        model = self(**kwargs)
+        model = self.cls(**kwargs)
         self.session.add(model)
         self.session.commit()
         self.session.refresh(model)
