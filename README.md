@@ -42,9 +42,6 @@ app/
 │   └── __init__.py
 │   └── config.py
 │   └── orm.py
-├── helpers/ (
-│   └── __init__.py
-│   └── auth_helper.py
 ├── middlewares/
 │   └── __init__.py
 │   └── oauth_middleware.py
@@ -64,6 +61,7 @@ app/
 │   └── user_schema.py
 ├── services/
 │   └── __init__.py
+│   └── auth_services.py
 ├── statics/
 │   └── style.css
 ├── templates/

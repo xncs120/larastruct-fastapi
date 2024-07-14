@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
@@ -6,7 +6,7 @@ from core.config import settings
 from core.orm import Orm
 from schemas.auth_schema import Token
 from schemas.user_schema import UserRequest
-from helpers.auth_helper import get_password_hash, authenticate_user, create_access_token
+from services.auth_services import AuthService
 
 router = APIRouter()
 
@@ -17,7 +17,7 @@ def register_user(user: UserRequest):
         conflicting_field = 'Username' if exist_user.username == user.username else 'Email'
         raise HTTPException(status_code=400, detail=f'{conflicting_field} already exist')
 
-    hashed_password = get_password_hash(user.password)
+    hashed_password = AuthService().get_password_hash(user.password)
     Orm('User').create({
         'name': user.name,
         'username': user.username,
@@ -29,10 +29,11 @@ def register_user(user: UserRequest):
 
 @router.post('/token', response_model=Token)
 async def get_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = authenticate_user(form_data.username, form_data.password)
+    auth_service = AuthService()
+    user = auth_service.authenticate_user(form_data.username, form_data.password)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Incorrect username or password')
 
-    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={'sub': user.username}, expires_delta=access_token_expires)
-    return {'access_token': access_token, 'token_type': 'bearer'}
+    expires_at = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = auth_service.create_access_token(data={'sub': user.username}, expires_at=expires_at)
+    return {'access_token': access_token, 'token_type': 'bearer', 'expires_at': expires_at}
